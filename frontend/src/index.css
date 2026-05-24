@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Variables ─────────────────────────────────────────────────────────── */
+:root {
+  --fire-red:     #ef4444;
+  --fire-orange:  #f97316;
+  --fire-amber:   #f59e0b;
+  --fire-yellow:  #eab308;
+  --safe-green:   #22c55e;
+  --bg-deep:      #0c0a09;
+  --bg-dark:      #1c1917;
+  --bg-card:      #292524;
+  --border:       rgba(249, 115, 22, 0.15);
+  --text-primary: #fafaf9;
+  --text-muted:   #a8a29e;
+}
+
+/* ── Base Reset ────────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar Styling ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: #57534e; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--fire-orange); }
+
+/* ── Selection Color ───────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(249, 115, 22, 0.3);
+  color: #fff;
+}
+
+/* ── Leaflet Map Overrides ─────────────────────────────────────────────────── */
+.leaflet-container {
+  background: #1a1211 !important;
+  font-family: 'DM Sans', sans-serif !important;
+}
+
+.leaflet-tile {
+  filter: saturate(0.7) brightness(0.6) sepia(0.3) hue-rotate(10deg);
+}
+
+.leaflet-popup-content-wrapper {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6) !important;
+}
+
+.leaflet-popup-content {
+  color: var(--text-primary) !important;
+  margin: 0 !important;
+  font-family: 'DM Sans', sans-serif !important;
+}
+
+.leaflet-popup-tip {
+  background: var(--bg-card) !important;
+}
+
+.leaflet-popup-close-button {
+  color: var(--text-muted) !important;
+  font-size: 18px !important;
+  top: 8px !important;
+  right: 8px !important;
+}
+
+/* ── Utility Classes ───────────────────────────────────────────────────────── */
+.font-display { font-family: 'Bebas Neue', cursive; }
+.font-mono    { font-family: 'JetBrains Mono', monospace; }
+
+/* Animated fire gradient text */
+.fire-text {
+  background: linear-gradient(135deg, #fb923c, #ef4444, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glowing border effect */
+.glow-border {
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.1), inset 0 0 20px rgba(249, 115, 22, 0.02);
+}
+
+.glow-border:hover {
+  border-color: rgba(249, 115, 22, 0.5);
+  box-shadow: 0 0 30px rgba(249, 115, 22, 0.2), inset 0 0 30px rgba(249, 115, 22, 0.04);
+  transition: all 0.3s ease;
+}
+
+/* Noise texture overlay */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Card base style */
+.card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Pulse dot */
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--fire-orange);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7); }
+  70%  { box-shadow: 0 0 0 10px rgba(249, 115, 22, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+}
+
+/* Loading shimmer */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--bg-card) 25%,
+    rgba(249,115,22,0.05) 50%,
+    var(--bg-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Risk badge */
+.risk-extreme { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+.risk-high     { background: rgba(249,115,22,0.15); color: #fdba74; border: 1px solid rgba(249,115,22,0.3); }
+.risk-moderate { background: rgba(234,179,8,0.15); color: #fde047; border: 1px solid rgba(234,179,8,0.3); }
+.risk-low      { background: rgba(34,197,94,0.15); color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
