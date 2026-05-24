@@ -9,7 +9,7 @@ import axios from 'axios'
 
 // Base axios instance
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   timeout: 30000,  // 30s — model inference can take a moment
   headers: { 'Content-Type': 'application/json' }
 })
